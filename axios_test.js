@@ -8,8 +8,6 @@ async function test() {
 }
 test()
 
-
-
 //const data = staticData.getStaticData(); // use as global
 function getData() {
     // let returnObj;

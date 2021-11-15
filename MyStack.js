@@ -13,6 +13,7 @@ const MyStack = () => {
                     name="Homescreen"
                     component={HomeScreen}
                     options={{ title: 'Welcome from nav'}}
+                    style={{height: 100}}
                 />
             </Stack.Navigator>
     );
