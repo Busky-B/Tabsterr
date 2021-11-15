@@ -1,8 +1,21 @@
 console.log("Hello from testing.js")
 const staticData = require('./staticData');
+const { default: axios } = require('axios');
 
-const data = staticData.getStaticData(); // use as global
+//const data = staticData.getStaticData(); // use as global
+function getData() {
+    // let returnObj;
+    // axios.get("https://brottsplatskartan.se/api/events/?app=skolprojektBusky&location=lidköping")
+    // .then(x )
+    // .catch(err => {console.log(err);})
 
+    // return returnObj;
+}
+// let data = getData();
+console.log("getting data");
+getData();
+console.log("Data is: \n "+data);
+console.log("trying to acess data")
 const getLinks = () => data.links ;
 const getEvents = () => data.data ;
 const getHeadlines = () => data.data.map((x) => {

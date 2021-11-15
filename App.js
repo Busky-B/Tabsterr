@@ -4,7 +4,9 @@ import { StyleSheet, Text, View , Button, FlatList, Modal} from 'react-native';
 import axios from 'axios';
 import { Axios } from 'axios';
 import xml2js from 'xml2js';
-
+import {NavigationContainer, StackActions} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import MyStack from './MyStack.js';
 
 export default function App() {
   const testing = require('./testing.js');
@@ -38,40 +40,43 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Button 
-        title='Click Me'
-        onPress={() => displayEventData()}
-      />
-      <FlatList 
-      data= {eventData}
-      renderItem={({item}) => <Button title={item.id} onPress={() => logEvent(item.id)}/>}
-      />
-      <Modal style={styles.modal}
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {setModalVisible(!modalVisible)}}
-      >
-        <View style={styles.modal}>
-          <Button title="X" onPress={() => setModalVisible(!modalVisible)}/>
-          <View style={styles.modalBox}>
-            <Text>{modalContent.id}</Text>
-            <Text>{modalContent.Headlines}</Text>
+    <NavigationContainer>
+      <MyStack/>
+      <View style={styles.container}>
+        <Text>Open up App.js to start working on your app!</Text>
+        <StatusBar style="auto" />
+        <Button 
+          title='Click Me'
+          onPress={() => displayEventData()}
+        />
+        <FlatList 
+        data= {eventData}
+        renderItem={({item}) => <Button title={item.id} onPress={() => logEvent(item.id)}/>}
+        />
+        <Modal style={styles.modal}
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {setModalVisible(!modalVisible)}}
+        >
+          <View style={styles.modal}>
+            <Button title="X" onPress={() => setModalVisible(!modalVisible)}/>
+            <View style={styles.modalBox}>
+              <Text>{modalContent.id}</Text>
+              <Text>{modalContent.Headlines}</Text>
+            </View>
           </View>
-        </View>
-      </Modal>
-      <Text>STUFF GOES HERE -- {modalContent.id + modalContent.Headlines}</Text>
-    </View>
+        </Modal>
+        <Text>STUFF GOES HERE -- {modalContent.id + modalContent.Headlines}</Text>
+      </View>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },
