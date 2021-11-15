@@ -6,6 +6,7 @@ import { Axios } from 'axios';
 import xml2js from 'xml2js';
 import {NavigationContainer, StackActions} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import BugFilled from '@ant-design/icons';
 import MyStack from './MyStack.js';
 import testing from './testing.js';
 import staticData from './staticData.js';
@@ -47,6 +48,7 @@ export default function App() {
     <NavigationContainer>
       <MyStack/>
       <View style={styles.container}>
+        <BugFilled />
         <Text>Enter searchphrase with artist/band and click button</Text>
         <StatusBar style="auto" />
         <TextInput 
