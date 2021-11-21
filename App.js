@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View , Button, FlatList, Modal, TextInput} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View , Button, FlatList, Modal, TextInput, Linking} from 'react-native';
 import axios from 'axios';
 import { Axios } from 'axios';
 import xml2js from 'xml2js';
-import {NavigationContainer, StackActions} from '@react-navigation/native'
+import {Link, NavigationContainer, StackActions} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import BugFilled from '@ant-design/icons';
+import BugFilled, { BoldOutlined } from '@ant-design/icons';
 import MyStack from './MyStack.js';
 import testing from './testing.js';
 import staticData from './staticData.js';
@@ -43,19 +43,20 @@ export default function App() {
     setModalSubContent(artist);
     setModalVisible(!modalVisible);
   }
-
+  // FOR DEBUGGING, fills with dummydata automatically
+  useEffect(()=> setStaticData())
   return (
     <NavigationContainer>
-      <MyStack/>
+      {/* <MyStack/> */}
       <View style={styles.container}>
-        <BugFilled />
-        <Text>Enter searchphrase with artist/band and click button</Text>
+        <Text style={{ fontSize: 32}}>Enter searchphrase with artist/band and click button</Text>
         <StatusBar style="auto" />
         <TextInput 
           onChangeText={setSearchPhrase}
           value={searchPhrase}
-          style={{backgroundColor :"#222", borderRadius:25, padding:5, textAlign: "center", margin: 20}}
+          style={{backgroundColor :"#222", borderRadius:25, padding:5, textAlign: "center", margin: 20, color : 'white'}}
         />
+        <Text style={styles.myBtn} onPress={ () => console.log("myBtn was pressed")}>myBtn</Text>
         <Button 
           title='Fill list - Api Call'
           onPress={() => getAndSetEventData()}
@@ -65,7 +66,7 @@ export default function App() {
           title='Fill Dummy Data'
           onPress={() => setStaticData()}
         />
-        <FlatList 
+        <FlatList style={{margin: 10, paddingBottom : 10}} 
         data= {eventData}
         renderItem={({item}) => <Button title={item.title} onPress={() => logEvent(item.id)} color="#666" />}
         />
@@ -78,15 +79,14 @@ export default function App() {
           <View style={styles.modal}>
             <Button title="X" onPress={() => setModalVisible(!modalVisible)}/>
             <View style={styles.modalBox}>
-              <Text>{modalContent.id}</Text>
-              <Text>{modalContent.title}</Text>
-              <Text>{modalContent.type}</Text>
-              <Text>{modalContent.artist}</Text>
+              <Text >Id: {modalContent.id}</Text>
+              <Text style={{ fontSize: 22, fontWeight: BoldOutlined}}>{modalContent.title}</Text>
+              <Text>Artist: {modalContent.artist}</Text>
               <Text>{modalSubContent.name}</Text>
+              <Text style={{color: 'blue'}} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
             </View>
           </View>
         </Modal>
-        <Text>STUFF GOES HERE -- {modalContent.id + modalContent.Title}</Text>
       </View>
     </NavigationContainer>
   );
@@ -100,14 +100,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   modal: {
-    flex:0.7,
-    backgroundColor: 'green',
+    flex:1,
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center'
   },
   modalBox: {
     flex: 1,
+    width: '50%',
     backgroundColor: '#fff'
-  }
+  },
+  myBtn: {
+    backgroundColor: '#fff',
+    padding: 10,
+    margin: 10,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+
+    "&:hover": {
+      backgroundColor: '#000'
+    }
+  },
+  myBtnHover: {
+    backgroundColor: '#000'
+
+  },
+  
 });

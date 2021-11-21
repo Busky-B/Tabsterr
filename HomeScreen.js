@@ -5,10 +5,6 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <>
-            <BugFilled />
-            <Button 
-                title="this is a homescreenbtn"
-            />
         </>
     )
 
