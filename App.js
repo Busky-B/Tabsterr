@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View , Button, FlatList, Modal, TextInput, Linking} from 'react-native';
 import axios from 'axios';
 import { Axios } from 'axios';
-import xml2js from 'xml2js';
 import {Link, NavigationContainer, StackActions} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import BugFilled, { BoldOutlined } from '@ant-design/icons';
@@ -44,19 +43,17 @@ export default function App() {
     setModalVisible(!modalVisible);
   }
   // FOR DEBUGGING, fills with dummydata automatically
-  useEffect(()=> setStaticData())
+//  useEffect(()=> setStaticData())
   return (
-    <NavigationContainer>
-      {/* <MyStack/> */}
+      
       <View style={styles.container}>
-        <Text style={{ fontSize: 32}}>Enter searchphrase with artist/band and click button</Text>
+        <Text style={{ fontSize: 32, marginTop: 125, marginBottom : 50}}>Enter searchphrase with artist/band and click button</Text>
         <StatusBar style="auto" />
         <TextInput 
           onChangeText={setSearchPhrase}
           value={searchPhrase}
-          style={{backgroundColor :"#222", borderRadius:25, padding:5, textAlign: "center", margin: 20, color : 'white'}}
+          style={{width: '30%', backgroundColor :"#222", borderRadius:25, padding:5, textAlign: "center", margin: 20, color : 'white'}}
         />
-        <Text style={styles.myBtn} onPress={ () => console.log("myBtn was pressed")}>myBtn</Text>
         <Button 
           title='Fill list - Api Call'
           onPress={() => getAndSetEventData()}
@@ -80,16 +77,15 @@ export default function App() {
             <Button title="X" onPress={() => setModalVisible(!modalVisible)}/>
             <View style={styles.modalBox}>
               <Text >Id: {modalContent.id}</Text>
-              <Text style={{ fontSize: 22, fontWeight: BoldOutlined}}>{modalContent.title}</Text>
+              <Text style={{ fontSize: 22 }}>{modalContent.title}</Text>
               <Text>Artist: {modalContent.artist}</Text>
               <Text>{modalSubContent.name}</Text>
               <Text style={{color: 'blue'}} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
             </View>
           </View>
         </Modal>
-      </View>
-    </NavigationContainer>
-  );
+        </View>
+      );
 }
 
 const styles = StyleSheet.create({
@@ -116,11 +112,8 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
+    borderBottomStartRadius: 20
 
-    "&:hover": {
-      backgroundColor: '#000'
-    }
   },
   myBtnHover: {
     backgroundColor: '#000'
