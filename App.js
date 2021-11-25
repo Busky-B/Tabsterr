@@ -47,22 +47,28 @@ export default function App() {
   return (
       
       <View style={styles.container}>
-        <Text style={{ fontSize: 32, marginTop: 125, marginBottom : 50}}>Enter searchphrase with artist/band and click button</Text>
+        <Text style={{ fontSize: 22, marginTop: 125, marginBottom : 50, backgroundColor: "#ddd", padding: 30, borderRadius: 15}}>Enter searchphrase with artist/band and click button</Text>
         <StatusBar style="auto" />
         <TextInput 
           onChangeText={setSearchPhrase}
           value={searchPhrase}
-          style={{width: '30%', backgroundColor :"#222", borderRadius:25, padding:5, textAlign: "center", margin: 20, color : 'white'}}
+          placeholder="Search"
+          style={{width: '50%', backgroundColor :"#aaa", borderRadius:25, color:"blue", padding:5, textAlign: "center", margin: 20, color : 'white'}}
         />
-        <Button 
-          title='Fill list - Api Call'
-          onPress={() => getAndSetEventData()}
-          color="#222"
-        />
-        <Button
-          title='Fill Dummy Data'
-          onPress={() => setStaticData()}
-        />
+
+        <View style={styles.btnContainer}>
+          <Button 
+            title='Fill list - Api Call!'
+            onPress={() => getAndSetEventData()}
+            color="#222"
+            />
+          <Button
+            title='Fill Dummy Data'
+            onPress={() => setStaticData()}
+            />
+        </View>
+
+        <Text>Choose Song:</Text>
         <FlatList style={{margin: 10, paddingBottom : 10}} 
         data= {eventData}
         renderItem={({item}) => <Button title={item.title} onPress={() => logEvent(item.id)} color="#666" />}
@@ -117,6 +123,12 @@ const styles = StyleSheet.create({
   },
   myBtnHover: {
     backgroundColor: '#000'
+
+  },
+  btnContainer: {
+    flex:0.3,
+    flexDirection: 'row',
+    padding: 15,
 
   },
   
