@@ -19,6 +19,7 @@ export default function App() {
   const [modalContent, setModalContent] = useState({id:"", title : "", type : ""});
   const [modalSubContent, setModalSubContent] = useState({name: ""});
   const [searchPhrase, setSearchPhrase] = useState("") ;
+  const [searchHasBeenMade, setSearchHasBeenMade] = useState(false) ;
 
   const getAndSetEventData = () => {
     // test if a searchstring has been supplied or if the default "maiden" should be searched for
@@ -29,6 +30,7 @@ export default function App() {
     })
   }
   const setStaticData = () => {
+    setSearchHasBeenMade(true)
     setEventData(staticData.getStaticData());
   }
 
@@ -68,7 +70,10 @@ export default function App() {
             />
         </View>
 
-        <Text>Choose Song:</Text>
+        {searchHasBeenMade && // becomes visible if bool is true 
+          <Text style={{margin: 15}}>Choose Song:</Text>
+        }
+
         <FlatList style={{margin: 10, paddingBottom : 10}} 
         data= {eventData}
         renderItem={({item}) => <Button title={item.title} onPress={() => logEvent(item.id)} color="#666" />}
@@ -82,11 +87,15 @@ export default function App() {
           <View style={styles.modal}>
             <Button title="X" onPress={() => setModalVisible(!modalVisible)}/>
             <View style={styles.modalBox}>
-              <Text >Id: {modalContent.id}</Text>
-              <Text style={{ fontSize: 22 }}>{modalContent.title}</Text>
-              <Text>Artist: {modalContent.artist}</Text>
-              <Text>{modalSubContent.name}</Text>
-              <Text style={{color: 'blue'}} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
+              <View style= {{flex: 10}}>
+                {/* <Text >Id: {modalContent.id}</Text> */}
+                <Text style={{ fontSize: 22 }}>{modalContent.title}</Text>
+                <Text>Artist: {modalContent.artist}</Text>
+                <Text>{modalSubContent.name}</Text>
+              </View>
+              <View style={styles.modalFooter}>
+                <Text style={styles.myBtn} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
+              </View>
             </View>
           </View>
         </Modal>
@@ -106,17 +115,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  modalFooter: {
+    flex:1
+
   },
   modalBox: {
-    flex: 1,
+  //  flex: 1,
     width: '50%',
-    backgroundColor: '#fff'
+    height: '50%',
+    backgroundColor: '#fff',
+    padding: 15
   },
   myBtn: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
     padding: 10,
-    margin: 10,
     borderBottomEndRadius: 20,
     borderBottomStartRadius: 20
 
@@ -126,9 +140,8 @@ const styles = StyleSheet.create({
 
   },
   btnContainer: {
-    flex:0.3,
+    flex:1,
     flexDirection: 'row',
-    padding: 15,
 
   },
   
