@@ -85,8 +85,10 @@ export default function App() {
           onRequestClose={() => {setModalVisible(!modalVisible)}}
         >
           <View style={styles.modal}>
-            <Button title="X" onPress={() => setModalVisible(!modalVisible)}/>
             <View style={styles.modalBox}>
+              <View style={styles.modalBtnView}>
+                <Button title="Choose different song" onPress={() => setModalVisible(!modalVisible)} color='#222'/>
+              </View>
               <View style= {{flex: 10}}>
                 {/* <Text >Id: {modalContent.id}</Text> */}
                 <Text style={{ fontSize: 22 }}>{modalContent.title}</Text>
@@ -127,6 +129,11 @@ const styles = StyleSheet.create({
     height: '50%',
     backgroundColor: '#fff',
     padding: 15
+  },
+  modalBtnView: {
+    marginBottom: 50,
+    flex: 1
+
   },
   myBtn: {
     backgroundColor: '#ccc',
