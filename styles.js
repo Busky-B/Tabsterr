@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
     //marginBottom: 50,
 
   },
+  modalImage : {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 30
+  },
   myBtn: {
     backgroundColor: '#ccc',
     borderBottomEndRadius: 20,

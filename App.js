@@ -9,9 +9,12 @@ import BugFilled, { BoldOutlined } from '@ant-design/icons';
 import MyStack from './MyStack.js';
 import SongsterApiMethods from './SongsterrApiMethods.js';
 import staticData from './staticData.js';
+import logoscraper from './logoscraper.js'
 import styles from './styles.js'
 
 export default function App() {
+
+  const DebugMode = true;
   // Array where searchresults I.E songdata is saved
   const [eventData, setEventData] = useState([]) ;
 
@@ -46,9 +49,7 @@ export default function App() {
   }
 
   const logEvent = (e) => {
-    console.log(`Id: ${e}`);
     let selectedEvent = eventData.find(x => x.id === e);
-    console.log(selectedEvent);
     let artist = selectedEvent.artist;
 
     delete selectedEvent.artist
@@ -56,21 +57,30 @@ export default function App() {
     setModalSubContent(artist);
     setModalVisible(!modalVisible);
 
+    FetchLogo(selectedEvent.title + " " + artist.name).then((res) => {
+       setSongImage(res)
+    });
+
     // eventData.push(artist)
+
+  }
+  const FetchLogo = async (searchString) => {
+    console.log(`RUN: FetchLogo\n searchstring: [${searchString}]`);
+    
+    const response =   ( DebugMode ? require('./DebugImage.jpg') : await logoscraper.GetLogo(searchString))
+
+    return response; 
+  }
+  const CloseModal = () => {
+    setModalVisible(!modalVisible) ; // Invert state of modalvisibility
+    setSongImage("") ; // reset song image
 
   }
   // FOR DEBUGGING, fills with dummydata automatically
 //  useEffect(()=> setStaticData())
   return (
-      
+
       <View style={styles.container}>
-
-        { songImage.uri.length !== 0 &&
-          <Image 
-          source={songImage}
-          />
-        }      
-
         <Text style={{ fontSize: 22, marginTop: 125, marginBottom : 50, backgroundColor: "#ddd", padding: 30, borderRadius: 15}}>Tabsterr {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text></Text>
         <StatusBar style="auto" />
         <TextInput 
@@ -79,6 +89,7 @@ export default function App() {
           placeholder="Search"
           style={{width: '50%', backgroundColor :"#aaa", borderRadius:25, color:"blue", padding:5, textAlign: "center", margin: 20, color : 'white'}}
         />
+          <Image style={{width: 100, height: 100}} source={require('./DebugImage.jpg')}/>
 
         <View style={styles.btnContainer}>
           <Button 
@@ -109,13 +120,19 @@ export default function App() {
           <View style={styles.modal}>
             <View style={styles.modalBox}>
               <View style={styles.modalBtnView}>
-                <Button title="Choose different song" onPress={() => setModalVisible(!modalVisible)} color='#222'/>
+                <Button title="Choose different song" onPress={() => CloseModal()} color='#222'/>
               </View>
               <View style= {{flex: 10}}>
                 {/* <Text >Id: {modalContent.id}</Text> */}
                 <Text style={{ fontSize: 22 }}>{modalContent.title}</Text>
                 <Text>Artist: {modalContent.artist}</Text>
                 <Text>{modalSubContent.name}</Text>
+              </View>
+              <View style={styles.modalImage}>
+                <Image 
+                  style={{width: 100, height: 100}}
+                  source={songImage}
+                />
               </View>
               <View style={styles.modalFooter}>
                 <Text style={styles.myBtn} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
