@@ -7,24 +7,35 @@ import {Link, NavigationContainer, StackActions} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import BugFilled, { BoldOutlined } from '@ant-design/icons';
 import MyStack from './MyStack.js';
-import testing from './testing.js';
+import SongsterApiMethods from './SongsterrApiMethods.js';
 import staticData from './staticData.js';
-async function getWithAxios(){
-  return await testing.getData() ;
-}
+import styles from './styles.js'
+
 export default function App() {
-  const testing = require('./testing.js');
+  // Array where searchresults I.E songdata is saved
   const [eventData, setEventData] = useState([]) ;
+
+  // For checking if modal is visible or not
   const [modalVisible, setModalVisible] = useState(false);
+
+  // checks if image was found
+  const [songImage, setSongImage] = useState({uri : ''})
+  // Sets the content of the modal (selected song)
   const [modalContent, setModalContent] = useState({id:"", title : "", type : ""});
+
+  // State where the name of artist is saved, needed to be in a different one due to 
+  // layers of json response
   const [modalSubContent, setModalSubContent] = useState({name: ""});
+
+  // The searchphrase to be used
   const [searchPhrase, setSearchPhrase] = useState("") ;
+
+  // state for checking if an initial search has been made or not, elements might
+  // use this to determine if they should be displayed or not.
   const [searchHasBeenMade, setSearchHasBeenMade] = useState(false) ;
 
   const getAndSetEventData = () => {
-    // test if a searchstring has been supplied or if the default "maiden" should be searched for
-
-    testing.getData(searchPhrase).then(x => {
+    SongsterApiMethods.getData(searchPhrase).then(x => {
       console.log(x.data);
       setEventData(x.data)
     })
@@ -39,17 +50,27 @@ export default function App() {
     let selectedEvent = eventData.find(x => x.id === e);
     console.log(selectedEvent);
     let artist = selectedEvent.artist;
+
     delete selectedEvent.artist
     setModalContent(selectedEvent);
     setModalSubContent(artist);
     setModalVisible(!modalVisible);
+
+    // eventData.push(artist)
+
   }
   // FOR DEBUGGING, fills with dummydata automatically
 //  useEffect(()=> setStaticData())
   return (
       
       <View style={styles.container}>
-      
+
+        { songImage.uri.length !== 0 &&
+          <Image 
+          source={songImage}
+          />
+        }      
+
         <Text style={{ fontSize: 22, marginTop: 125, marginBottom : 50, backgroundColor: "#ddd", padding: 30, borderRadius: 15}}>Tabsterr {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text></Text>
         <StatusBar style="auto" />
         <TextInput 
@@ -105,51 +126,3 @@ export default function App() {
         </View>
       );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modal: {
-    flex:1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-  modalFooter: {
-    marginBottom: 20
-
-  },
-  modalBox: {
-  //  flex: 1,
-    width: '80%',
-    height: '80%',
-    backgroundColor: '#fff',
-    padding: 15
-  },
-  modalBtnView: {
-    //marginBottom: 50,
-
-  },
-  myBtn: {
-    backgroundColor: '#ccc',
-    borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
-    padding: 10
-
-  },
-  myBtnHover: {
-    backgroundColor: '#000'
-
-  },
-  btnContainer: {
-      padding: 15,
-    flexDirection: 'row',
-
-  },
-  
-});
