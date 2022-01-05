@@ -1,8 +1,40 @@
 import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
+  glassContainer: {
+    backgroundColor: '#fff8',
+    paddingHorizontal: 20,
+
+  },
+  searchBar: {
+    flexDirection: 'row',
+    // backgroundColor :"#aaa", 
+    backgroundColor: '#c0d1c8',
+    borderRadius:25, 
+    color:"blue", 
+    padding:5, 
+    textAlign: "center", 
+    margin: 20, 
+    color : '#000',
+    elevation: 3,
+    borderColor: '#395244',
+    borderWidth: 2,
+  },
+  greetingCard: { 
+    fontSize: 22,
+    marginTop: 125, 
+    marginBottom : 50, 
+    backgroundColor: "#9ab5a7", 
+    padding: 30, 
+    borderRadius: 15,
+    elevation: 100,
+    borderColor: '#395244',
+    borderWidth: 2,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#ccc',
+    flexDirection: 'column',
+    // backgroundColor: '#ccc',
+    backgroundColor: '#222',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -46,8 +78,9 @@ const styles = StyleSheet.create({
 
   },
   btnContainer: {
-      padding: 15,
-    flexDirection: 'row',
+    flex: 1,
+    padding: 15,
+    flexDirection: 'column',
 
   },
   

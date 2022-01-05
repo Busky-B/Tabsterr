@@ -11,6 +11,7 @@ import SongsterApiMethods from './SongsterrApiMethods.js';
 import staticData from './staticData.js';
 import logoscraper from './logoscraper.js'
 import styles from './styles.js'
+import MyButton from './myButton.js';
 
 export default function App() {
 
@@ -76,20 +77,23 @@ export default function App() {
     setSongImage("") ; // reset song image
 
   }
+ 
   // FOR DEBUGGING, fills with dummydata automatically
 //  useEffect(()=> setStaticData())
   return (
 
       <View style={styles.container}>
-        <Text style={{ fontSize: 22, marginTop: 125, marginBottom : 50, backgroundColor: "#ddd", padding: 30, borderRadius: 15}}>Tabsterr {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text></Text>
+        <View >
+
+        <Text style={styles.greetingCard}>Tabsterr {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text></Text>
         <StatusBar style="auto" />
         <TextInput 
           onChangeText={setSearchPhrase}
           value={searchPhrase}
           placeholder="Search"
-          style={{width: '50%', backgroundColor :"#aaa", borderRadius:25, color:"blue", padding:5, textAlign: "center", margin: 20, color : 'white'}}
-        />
-          <Image style={{width: 100, height: 100}} source={require('./DebugImage.jpg')}/>
+          style={styles.searchBar}
+          />
+          {/* <Image style={{width: 100, height: 100}} source={require('./DebugImage.jpg')}/> */}
 
         <View style={styles.btnContainer}>
           <Button 
@@ -97,15 +101,19 @@ export default function App() {
             onPress={() => getAndSetEventData()}
             color="#222"
             />
-          <Button
+          {/* <Button
             title='Fill Dummy Data (Debug)'
             onPress={() => setStaticData()}
-            />
+          /> */}
+            <MyButton 
+              title='Pressable Dummy Data'
+              onPress={() => setStaticData()}
+              />
         </View>
 
-        {searchHasBeenMade && // becomes visible if bool is true 
-          <Text style={{margin: 15}}>Choose Song:</Text>
-        }
+        {/* {searchHasBeenMade && // becomes visible if bool is true 
+          <Text style={{}}>Choose Song:</Text>
+        } */}
 
         <FlatList style={{margin: 10, paddingBottom : 10}} 
         data= {eventData}
@@ -116,7 +124,7 @@ export default function App() {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {setModalVisible(!modalVisible)}}
-        >
+          >
           <View style={styles.modal}>
             <View style={styles.modalBox}>
               <View style={styles.modalBtnView}>
@@ -132,7 +140,7 @@ export default function App() {
                 <Image 
                   style={{width: 100, height: 100}}
                   source={songImage}
-                />
+                  />
               </View>
               <View style={styles.modalFooter}>
                 <Text style={styles.myBtn} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
@@ -140,6 +148,7 @@ export default function App() {
             </View>
           </View>
         </Modal>
+        </View>
         </View>
       );
 }
