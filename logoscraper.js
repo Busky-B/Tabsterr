@@ -41,7 +41,13 @@ const GetLogo = async (searchPhrase) => {
     console.log("Returning: GetLogo\n res:" + response);
     return response
 }
-
+const debug = async () => {
+    axios.get("http://coverartarchive.org/release/b8a3f027-cc86-4b00-b045-351882e00e54/6749434866-250.jpg")
+        .then((res) => {
+            console.log(res.data);
+        })
+}
+// For testing, Run this with "node logoscraper.js" from CLI to test if module is working
 if( typeof require !== 'undefined' && require.main === module) {
     // console.log("Main start");
     // GetImage().then((res) => {
@@ -52,7 +58,8 @@ if( typeof require !== 'undefined' && require.main === module) {
     //         console.log(res);
     //     })
     // })
-    GetLogo("afterlife avenged sevenfold").then((res) => console.log(res));
+    // GetLogo("afterlife avenged sevenfold").then((res) => console.log(res));
+    debug();
 }
 
 module.exports = {GetLogo} ;
