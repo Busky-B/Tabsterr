@@ -1,22 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View , Button, FlatList, Modal, TextInput, Linking, Image, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View , Button, FlatList, Modal, TextInput, Linking, Image, ImageBackground, TouchableOpacity, Animated} from 'react-native';
 import axios from 'axios';
 import { Axios } from 'axios';
 import {Link, NavigationContainer, StackActions} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import BugFilled, { BoldOutlined } from '@ant-design/icons';
 import MyStack from './MyStack.js';
 import SongsterApiMethods from './SongsterrApiMethods.js';
 import staticData from './staticData.js';
 import logoscraper from './logoscraper.js'
 import styles from './styles.js'
 import MyButton, {MyButtonSmall} from './myButton.js';
+import * as Animatable from 'react-native-animatable';
+import {Icon} from 'react-native-elements'
 
 export default function App() {
   const DebugMode = false; // set to false in order to consume api's
   
   const bgImage = require('./img/bgi2.jpg');
+
+  // determines wether image is loading or not
+  const [imageLoading, setImageLoading] = useState(false);
+
   // Array where searchresults I.E songdata is saved
   const [eventData, setEventData] = useState([]) ;
 
@@ -58,12 +63,14 @@ export default function App() {
     setModalContent(selectedEvent);
     setModalSubContent(artist);
     setModalVisible(!modalVisible);
-
+    setImageLoading(!imageLoading);
     FetchLogo(selectedEvent.title + " " + artist.name).then((res) => {
       console.log(`setting songImage too ${res}`); 
       setSongImage(res)
       console.log(`logging songImage: ${songImage}`);
 
+    }).finally(() => {
+      setImageLoading(false);
     });
     // setSongImage('http://coverartarchive.org/release/b8a3f027-cc86-4b00-b045-351882e00e54/6749434866-250.jpg')
 
@@ -90,6 +97,10 @@ export default function App() {
 
     <View style={styles.container}> 
       <ImageBackground  source={bgImage} style={styles.bgImg} resizeMode='cover'>
+        {/* <TouchableOpacity style={{backgroundColor: 'red'}}><Text style={{color: '#fff'}}>Try me !</Text></TouchableOpacity> */}
+
+        
+        
         <View style={styles.greetingContainer}>
           {/* <Image 
             source={{uri:'http://coverartarchive.org/release/b8a3f027-cc86-4b00-b045-351882e00e54/6749434866-250.jpg'}} 
@@ -99,15 +110,26 @@ export default function App() {
 
           <StatusBar style="auto" />
 
-          <TextInput 
-            onChangeText={setSearchPhrase}
-            value={searchPhrase}
-            placeholder="Search . . ."
-            placeholderTextColor='#fff'
-            style={styles.greetingSearchBar}
-            />
+          <View style={styles.greetingSearchContainer}
+          >
+            <TextInput 
+              onChangeText={setSearchPhrase}
+              value={searchPhrase}
+              placeholder="Search . . ."
+              placeholderTextColor='#fff'
+              style={styles.greetingSearchBar}
+              />
+            <View style={styles.greetingSearchBarIconContainer}>
+              {/* <SearchIcon size={18} fill={'#fff'}/>  */}
+              <Icon
+                type='evilicon'
+                name='search'
+                color='#fff'
+              />
+            </View>
+          </View>
             <MyButtonSmall
-              title='O K'
+              title='OK'
               onPress={() => getAndSetEventData()}
             />
             {/* <Image style={{width: 100, height: 100}} source={require('./DebugImage.jpg')}/> */}
@@ -159,13 +181,28 @@ export default function App() {
                   <Text>{modalSubContent.name}</Text>
                 </View>
                 <View style={styles.modalImage}>
-                <Text>{songImage}</Text>
+                {/* <Text>{songImage}</Text> */}
+                {imageLoading &&
+
+                  <Animatable.Text
+                  animation="slideInDown"
+                  iterationCount="infinite"
+                  direction="alternate"
+                  >
+                  Loading . . .
+                </Animatable.Text> 
+                }
+                {!imageLoading &&
+                
                   <Image 
-                    style={{width: 100, height: 100, backgroundColor: 'red'}}
-                    source={{uri: songImage}}
-                    // resizeMode='stretch'
-                    />
+                  style={{width: 300, height: 300}}
+                  source={{uri: songImage}}
+                  // resizeMode='stretch'
+                  />
+                }
                 </View>
+                <Button>
+                </Button>
                 <View style={styles.modalFooter}>
                   <Text style={styles.myBtn} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
                 </View>

@@ -17,11 +17,27 @@ const styles = StyleSheet.create({
     margin:50,
     marginTop:125,
   },
+  greetingSearchContainer: {
+    flex: 1,
+    flexDirection: 'row', 
+    borderBottomWidth: 1,
+    borderColor: '#395244',
+    borderWidth: 2,
+    backgroundColor: 'transparent',
+    borderRadius:25, 
+
+  },
+  greetingSearchBarIconContainer: {
+    flex: 1,
+    alignSelf: 'center',
+    // position:'absolute', 
+    // right:11, 
+    // top: 11
+  },
   greetingSearchBar: {
-    flexDirection: 'row',
+    flex:3,
     // backgroundColor :"#aaa", 
     // backgroundColor: '#c0d1c8',
-    backgroundColor: 'transparent',
     borderRadius:25, 
     // color:"blue", 
     padding:5, 
@@ -31,8 +47,7 @@ const styles = StyleSheet.create({
     // color : '#000',
     color: '#fff',
     elevation: 3,
-    borderColor: '#395244',
-    borderWidth: 2,
+    
   },
   greetingCard: { 
     fontSize: 22,
@@ -79,7 +94,7 @@ const styles = StyleSheet.create({
   },
   modalImage : {
     flex: 3,
-    // alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     // elevation: 3,
     marginBottom: 50,
