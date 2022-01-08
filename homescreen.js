@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View , Button, FlatList, Modal, TextInput, Linking, Image, ImageBackground, TouchableOpacity, Animated} from 'react-native';
@@ -13,7 +14,6 @@ import styles from './styles.js'
 import MyButton, {MyButtonSmall} from './myButton.js';
 import * as Animatable from 'react-native-animatable';
 import {Icon} from 'react-native-elements'
-import VoiceRecorder from './voice_recorder.js';
 
 export default function App() {
   const DebugMode = false; // set to false in order to consume api's
@@ -87,7 +87,6 @@ export default function App() {
     return response; 
   }
   const CloseModal = () => {
-    console.log(modalSubContent.name);
     setModalVisible(!modalVisible) ; // Invert state of modalvisibility
     // setSongImage("") ; // reset song image
 
@@ -99,10 +98,21 @@ export default function App() {
 
     <View style={styles.container}> 
       <ImageBackground  source={bgImage} style={styles.bgImg} resizeMode='cover'>
+        {/* <TouchableOpacity style={{backgroundColor: 'red'}}><Text style={{color: '#fff'}}>Try me !</Text></TouchableOpacity> */}
+
+        
+        
         <View style={styles.greetingContainer}>
+          {/* <Image 
+            source={{uri:'http://coverartarchive.org/release/b8a3f027-cc86-4b00-b045-351882e00e54/6749434866-250.jpg'}} 
+            style={{width: 100,height:100, backgroundColor:'red'}} 
+          /> */}
           <Text style={styles.greetingCard}>Tabsterr {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text></Text>
+
           <StatusBar style="auto" />
-          <View style={styles.greetingSearchContainer}>
+
+          <View style={styles.greetingSearchContainer}
+          >
             <TextInput 
               onChangeText={setSearchPhrase}
               value={searchPhrase}
@@ -111,6 +121,7 @@ export default function App() {
               style={styles.greetingSearchBar}
               />
             <View style={styles.greetingSearchBarIconContainer}>
+              {/* <SearchIcon size={18} fill={'#fff'}/>  */}
               <Icon
                 type='evilicon'
                 name='search'
@@ -122,17 +133,36 @@ export default function App() {
               title='OK'
               onPress={() => getAndSetEventData()}
             />
+            {/* <Image style={{width: 100, height: 100}} source={require('./DebugImage.jpg')}/> */}
 
           </View>
         <View style={styles.btnContainer}>
+          {/* <MyButton 
+            title='OKk'
+            onPress={() => getAndSetEventData()}
+            /> */}
+          {/* <Button 
+            title='Fill list - Api Call!'
+            onPress={() => getAndSetEventData()}
+            color="#222"
+          /> */}
+          {/* <Button
+            title='Fill Dummy Data (Debug)'
+            onPress={() => setStaticData()}
+          /> */}
             <MyButton 
               title='Pressable Dummy Data Data'
               onPress={() => setStaticData()}
               />
         </View>
+
+        {/* {searchHasBeenMade && // becomes visible if bool is true 
+          <Text style={{}}>Choose Song:</Text>
+        } */}
+
           <FlatList style={styles.songList} 
           data= {eventData}
-          renderItem={({item}) => <MyButton title={item.title} onPress={() => logEvent(item.id)} color="#c0d1c8" />}
+          renderItem={({item}) => <Button title={item.title} onPress={() => logEvent(item.id)} color="#c0d1c8" />}
           />
           <Modal style={styles.modal}
             animationType="slide"
@@ -168,6 +198,7 @@ export default function App() {
                   <Image 
                   style={{width: 300, height: 300}}
                   source={{uri: songImage}}
+                  // resizeMode='stretch'
                   />
                 }
                 </View>
