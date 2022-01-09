@@ -3,7 +3,7 @@ const { default: axios } = require('axios');
 /**
  * Method for getting song-data from the songsterr API
  * 
- * @param {*} searchPattern 
+ * @param {string} searchPattern 
  * if no parameter was sent then method defaults to maiden for
  * for debugging purposes 
  * 

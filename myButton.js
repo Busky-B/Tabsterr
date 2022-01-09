@@ -11,7 +11,6 @@ export default function MyButton(props) {
 //   const [btnColor, setBtnColor] = useState(new Animated.Value(0))
   const btnColor = new Animated.Value(0.1)
   const onPressIn = () => {
-      console.log("Entered onPressIn")
       Animated.spring(btnScale, { toValue: 1.1, useNativeDriver: true,})
         .start();
       Animated.spring(btnColor, { toValue:0.7, useNativeDriver: true})
@@ -51,7 +50,6 @@ export function MyButtonSmall(props) {
 //   const [btnColor, setBtnColor] = useState(new Animated.Value(0))
   const btnColor = new Animated.Value(0.1)
   const onPressIn = () => {
-      console.log("Entered onPressIn")
       Animated.spring(btnScale, { toValue: 1.1, useNativeDriver: true,})
         .start();
       Animated.spring(btnColor, { toValue:0.7, useNativeDriver: true})
@@ -121,7 +119,8 @@ const styles = StyleSheet.create({
     
   },
   button: {
-    backgroundColor:'#52605999',
+    // backgroundColor:'#526059ff',
+    backgroundColor:'#395244', 
     alignSelf: 'center',
     width: '100%',
     // // flex:1 ,
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     // backgroundColor: 'red',
     // borderRadius: 4,
-    // // elevation: 3, // Somehow messes with the overall look
+    elevation: 3, // Somehow messes with the overall look
     // // opacity: 0.9,
     // backgroundColor: '#d9e3de',
     // margin: 10,
@@ -157,12 +156,12 @@ const styles = StyleSheet.create({
     // padding: 0,
   },
   text: {
-    fontSize: 24,
+    fontSize: 18,
     // // lineHeight: 21,
     fontWeight: 'bold',
     // letterSpacing: 0.25,
     color: '#ddd',
-
+    textAlign: 'center',
   },
 
   textSmall: {
