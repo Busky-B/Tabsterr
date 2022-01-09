@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {  useEffect, useState } from 'react';
 import { Text, View , Button,  Modal, Linking, Image, StyleSheet} from 'react-native';
 import * as Animatable from 'react-native-animatable';
@@ -51,3 +52,13 @@ export default function SongModal(props) {
 const modalStyles = StyleSheet.create({
 
 })
+=======
+import React from 'react';
+const SongModal = () => {
+
+
+}
+
+
+export default SongModal;
+>>>>>>> 23c01548638046bc50282953e64ad02ddc3be2ba

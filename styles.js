@@ -5,11 +5,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   songList: {
-    flex:1,
+    flex:2,
     margin: 10, 
     paddingBottom : 10, 
     paddingHorizontal: 20, 
+<<<<<<< HEAD
     borderRadius: 15,
+=======
+    // backgroundColor: '#fff', 
+>>>>>>> 23c01548638046bc50282953e64ad02ddc3be2ba
   },
   greetingContainer : {
     flex: 1,
@@ -17,7 +21,7 @@ const styles = StyleSheet.create({
     marginTop:125,
   },
   greetingSearchContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row', 
     borderBottomWidth: 1,
     borderColor: '#395244',
