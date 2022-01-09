@@ -9,11 +9,7 @@ const styles = StyleSheet.create({
     margin: 10, 
     paddingBottom : 10, 
     paddingHorizontal: 20, 
-<<<<<<< HEAD
     borderRadius: 15,
-=======
-    // backgroundColor: '#fff', 
->>>>>>> 23c01548638046bc50282953e64ad02ddc3be2ba
   },
   greetingContainer : {
     flex: 1,

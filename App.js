@@ -7,12 +7,8 @@ import logoscraper from './logoscraper.js'
 import styles from './styles.js'
 import MyButton, {MyButtonSmall} from './myButton.js';
 import {Icon} from 'react-native-elements'
-<<<<<<< HEAD
 import SongModal from './SongModal.js';
 import AudioRecorder from './AudioRecorder.js';
-=======
-import VoiceRecorder from './voice_recorder.js';
->>>>>>> 23c01548638046bc50282953e64ad02ddc3be2ba
 
 
 export default function App() {
@@ -101,35 +97,15 @@ export default function App() {
       </View>
       <ImageBackground  source={bgImage} style={styles.bgImg} resizeMode='cover'>
         <View style={styles.greetingContainer}>
-<<<<<<< HEAD
           <View style={styles.greetingCardContainer} >
 
             <View style={{position:'absolute', right: 50, top: 20}}>
               <Icon name='music' type='font-awesome'color='white' />
-=======
-          <Text style={styles.greetingCard}>Tabsterr {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text></Text>
-          <StatusBar style="auto" />
-          <View style={styles.greetingSearchContainer}>
-            <TextInput 
-              onChangeText={setSearchPhrase}
-              value={searchPhrase}
-              placeholder="Search . . ."
-              placeholderTextColor='#fff'
-              style={styles.greetingSearchBar}
-              />
-            <View style={styles.greetingSearchBarIconContainer}>
-              <Icon
-                type='evilicon'
-                name='search'
-                color='#fff'
-              />
->>>>>>> 23c01548638046bc50282953e64ad02ddc3be2ba
             </View>
             <Text style={styles.greetingCard}>Tabsterr
             {'\n'}<Text style={{fontSize: 16}}>Search for tab by artist or song</Text>
             </Text>
           </View>
-<<<<<<< HEAD
           <StatusBar style="auto" />
             <View style={styles.greetingSearchContainer}>
               <TextInput 
@@ -159,67 +135,6 @@ export default function App() {
           {modalVisible && 
             <SongModal data={songData} modalVisible={modalVisible} imageLoading={imageLoading} songImage={songImage} closeModalFunction={CloseModal}/>
           }
-=======
-            <MyButtonSmall
-              title='OK'
-              onPress={() => getAndSetEventData()}
-            />
-
-          </View>
-        <View style={styles.btnContainer}>
-            <MyButton 
-              title='Pressable Dummy Data Data'
-              onPress={() => setStaticData()}
-              />
-        </View>
-          <FlatList style={styles.songList} 
-          data= {eventData}
-          renderItem={({item}) => <MyButton title={item.title} onPress={() => logEvent(item.id)} color="#c0d1c8" />}
-          />
-          <Modal style={styles.modal}
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {setModalVisible(!modalVisible)}}
-            >
-            <View style={styles.modal}>
-              <View style={styles.modalBox}>
-                <View style={styles.modalBtnView}>
-                  <Button title="Choose different song" onPress={() => CloseModal()} color='#222'/>
-                </View>
-                <View style= {{flex: 1}}>
-                  {/* <Text >Id: {modalContent.id}</Text> */}
-                  <Text style={{ fontSize: 22 }}>{modalContent.title}</Text>
-                  <Text>Artist: {modalContent.artist}</Text>
-                  <Text>{modalSubContent.name}</Text>
-                </View>
-                <View style={styles.modalImage}>
-                {/* <Text>{songImage}</Text> */}
-                {imageLoading &&
-
-                  <Animatable.Text
-                  animation="slideInDown"
-                  iterationCount="infinite"
-                  direction="alternate"
-                  >
-                  Loading . . .
-                </Animatable.Text> 
-                }
-                {!imageLoading &&
-                
-                  <Image 
-                  style={{width: 300, height: 300}}
-                  source={{uri: songImage}}
-                  />
-                }
-                </View>
-                <View style={styles.modalFooter}>
-                  <Text style={styles.myBtn} onPress={() => Linking.openURL(`http://www.songsterr.com/a/wa/song?id=${modalContent.id}`)}>Go to songtab</Text>
-                </View>
-              </View>
-            </View>
-          </Modal>
->>>>>>> 23c01548638046bc50282953e64ad02ddc3be2ba
         </ImageBackground>
         </View>
       );
