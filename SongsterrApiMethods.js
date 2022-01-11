@@ -13,8 +13,8 @@ async function getData(searchPattern = "maiden") {
 
     let obj;
     await axios.get(`http://www.songsterr.com/a/ra/songs.json?pattern=${searchPattern}`)
-        .then(x => obj = x)
-        .then(() => console.log("Axios finished" + obj))
+        .then(x => obj = x);
+        // .then(() => console.log("Axios finished" + obj))
 
     return obj;
 }

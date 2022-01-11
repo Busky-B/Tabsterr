@@ -41,9 +41,9 @@ export default function App() {
    */
   const getAndSetEventData = () => {
     SongsterApiMethods.getData(searchPhrase).then(x => {
-      console.log(x.data);
-      setEventData(x.data)
-    })
+      // console.log(x.data);
+      setEventData(x.data);
+    });
   }
   /**
    * Method for debugging, Gets some static data of songs from a file
@@ -62,9 +62,7 @@ export default function App() {
     let selectedEvent = eventData.find(x => x.id === e);
     let artist = selectedEvent.artist;
 
-    console.log(artist.name);
     setSongData({id: selectedEvent.id, title: selectedEvent.title, type: selectedEvent.type, artistName: artist.name});
-
     setModalVisible(!modalVisible); // Toggle the modal
     setImageLoading(!imageLoading); // toggle loading animation for image
 
@@ -80,12 +78,12 @@ export default function App() {
    *  @param {String} searchString  string to be searched for, concatted by the artist and song name
    */
   const FetchLogo = async (searchString) => {
+    console.log("SHOW ME: " + searchString);
     const response = await logoscraper.GetLogo(searchString) ;
     return response; 
   }
 
   const CloseModal = () => {
-    console.log(modalSubContent.name);
     setModalVisible(!modalVisible) ; // Invert state of modalvisibility
   }
   

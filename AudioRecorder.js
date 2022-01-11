@@ -2,6 +2,9 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
 
+// This module uses the expo-av module in order to do audioplayback and recording. some tweaking has been made but alot of it is from the examples in the expo docs
+// The plan was to use this and search for songs via recorded voice -> shazamapi in order to get a song name,
+// However shazams api REQUIRES audio in raw data formatted as b64 and there is no easy way of converting standard audio from phone (m4a) to raw data. 
 export default function AudioRecorder() {
   const [audioFile, setAudioFile] = React.useState();
   const [fileRecorded, setFileRecorded] = React.useState(false);
