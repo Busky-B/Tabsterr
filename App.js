@@ -122,14 +122,16 @@ export default function App() {
                   />
             </TouchableOpacity>
           </View>
-          <FlatList style={styles.songList} 
-          data= {eventData}
-          renderItem={({item}) => 
-          <View style={{margin: 2}}>
-            <MyButton title={item.title} onPress={() => selectSong(item.id)}  />
-          </View>
-          }
-          />
+	  <View style={styles.songListContainer}>
+		  <FlatList style={styles.songList} 
+		  data= {eventData}
+		  renderItem={({item}) => 
+		  <View style={{margin: 2}}>
+		    <MyButton title={item.title} onPress={() => selectSong(item.id)}  />
+		  </View>
+		  }
+		  />
+	  </View>
           {modalVisible && 
             <SongModal data={songData} modalVisible={modalVisible} imageLoading={imageLoading} songImage={songImage} closeModalFunction={CloseModal}/>
           }

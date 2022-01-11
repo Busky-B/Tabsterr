@@ -4,8 +4,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  songListContainer: {
+   flex:1,
+  },
   songList: {
-    flex:2,
     margin: 10, 
     paddingBottom : 10, 
     paddingHorizontal: 20, 
