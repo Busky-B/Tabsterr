@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Tabsterr",
+    "slug": "reactNativeLabb",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./img/AppIcon.png",
+    "splash": {
+      "image": "./img/splashscreen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "labbReactNative.apk"
+    },
+    "web": {
+      "favicon": "./img/AppIcon.png"
+    },
+    "plugins": [
+      "expo-av"
+    ]
+  }
+}

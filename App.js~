@@ -90,11 +90,11 @@ export default function App() {
   return (
 
     <View style={styles.container}> 
+      <View >
+        <AudioRecorder />
+      </View>
       <ImageBackground  source={bgImage} style={styles.bgImg} resizeMode='cover'>
         <View style={styles.greetingContainer}>
-          <View >
-            <AudioRecorder />
-          </View>
           <View style={styles.greetingCardContainer} >
 
             <View style={{position:'absolute', right: 50, top: 20}}>
@@ -122,16 +122,14 @@ export default function App() {
                   />
             </TouchableOpacity>
           </View>
-	  <View style={styles.songListContainer}>
-		  <FlatList style={styles.songList} 
-		  data= {eventData}
-		  renderItem={({item}) => 
-		  <View style={{margin: 2}}>
-		    <MyButton title={item.title} onPress={() => selectSong(item.id)}  />
-		  </View>
-		  }
-		  />
-	  </View>
+          <FlatList style={styles.songList} 
+          data= {eventData}
+          renderItem={({item}) => 
+          <View style={{margin: 2}}>
+            <MyButton title={item.title} onPress={() => selectSong(item.id)}  />
+          </View>
+          }
+          />
           {modalVisible && 
             <SongModal data={songData} modalVisible={modalVisible} imageLoading={imageLoading} songImage={songImage} closeModalFunction={CloseModal}/>
           }

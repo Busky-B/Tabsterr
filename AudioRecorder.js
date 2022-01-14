@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
+import Shazam from './Shazam.js';
 
 // This module uses the expo-av module in order to do audioplayback and recording. some tweaking has been made but alot of it is from the examples in the expo docs
 // The plan was to use this and search for songs via recorded voice -> shazamapi in order to get a song name,
@@ -64,13 +65,17 @@ export default function AudioRecorder() {
     setAudioFile({sound:sound, duration: status.durationMillis, file: recording.getUri})
     const uri = recording.getURI(); 
     console.log('Recording stopped and stored at', uri);
+    console.log(`Logging type of uri: `);
     setFileRecorded(true)
 
-
+    Shazam.debug(recording.getURI()) ;
   }
 
   function getRecording() {
       return recordings.map((r, index) => {
+        // console.log(r.sound);
+        // console.log(typeof(r.sound));
+        
           return (
              <View>
                  <Button title="play recording" onPress={() => r.sound.replayAsync()}></Button>
