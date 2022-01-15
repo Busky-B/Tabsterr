@@ -8,7 +8,6 @@ let url = "https://musicbrainz.org/search?query={q}&type=release&method=indexed"
  */
 const GetImage = async (searchPhrase = "diary of jane") => {
     searchUrl = url.replace('{q}', searchPhrase.replace(/ /g, '+')) 
-    console.log("RUN: GetImage");
 
   const response = await axios.get(searchUrl).then((res) => {
       // Filtering the raw htmldata 
@@ -28,7 +27,6 @@ const GetImage = async (searchPhrase = "diary of jane") => {
  * @returns Uri for coverart which can then be used within an <Image> component
  */
 const GetImageByMbid = async (mbid) => {
-    console.log("RUN: GetImageByMbid");
     const response = axios.get('http://www.coverartarchive.org/release/' + mbid.toString()+'/')
         .then((res) => {
             images = res.data.images;
@@ -63,5 +61,4 @@ const debug = async () => {
 if( typeof require !== 'undefined' && require.main === module) {
     debug();
 }
-
 module.exports = {GetLogo} ;

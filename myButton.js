@@ -37,9 +37,9 @@ export default function MyButton(props) {
   return (
 
     <Animated.View style={[styles.buttonContainer, aniScaleTarget]} onPressIn>
-    <Pressable style={styles.button} onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
-        <Text style={styles.text}>{title}</Text>
-    </Pressable>
+        <Pressable style={styles.button} onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
+            <Text style={styles.text}>{title}</Text>
+        </Pressable>
       </Animated.View>
   );
 }
@@ -85,91 +85,47 @@ export function MyButtonSmall(props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    // // alignItems: 'center',
-    // // justifyContent: 'center',
-    // backgroundColor: '#d9e3de',
-    // backgroundColor: '#526059fa',
     backgroundColor: 'transparent',
     borderRadius: 10,
-    // opacity: 1,
     elevation: 3,
     borderColor: '#395244',
     borderWidth: 2,
-    // padding: 10,
-    
-    
   },
 
   buttonContainerSmall: {
     width:75,
     alignSelf:'center',
     marginTop: 5,
-    // alignItems: 'center',
-    // // justifyContent: 'center',
-    // backgroundColor: '#d9e3de',
-    // backgroundColor: '#526059fa',
-    // backgroundColor: 'transparent',
     borderRadius: 10,
-    // opacity: 1,
     elevation: 3,
     borderColor: '#395244',
     borderWidth: 2,
-    // padding: 10,
-    
-    
   },
   button: {
-    // backgroundColor:'#526059ff',
     backgroundColor:'#395244', 
     alignSelf: 'center',
     width: '100%',
-    // // flex:1 ,
-    // // alignItems: 'center',
-    // // justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 32,
-    // backgroundColor: 'red',
-    // borderRadius: 4,
     elevation: 3, // Somehow messes with the overall look
-    // // opacity: 0.9,
-    // backgroundColor: '#d9e3de',
-    // margin: 10,
-    // // backgroundColor: 'black',
-    // padding: 0,
   },
   buttonSmall: {
     backgroundColor:'#52605999',
     alignSelf: 'center',
     width: '100%',
-    // // flex:1 ,
-    // // alignItems: 'center',
-    // // justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 12,
-    // backgroundColor: 'red',
-    // borderRadius: 4,
-    // // elevation: 3, // Somehow messes with the overall look
-    // // opacity: 0.9,
-    // backgroundColor: '#d9e3de',
-    // margin: 10,
-    // // backgroundColor: 'black',
-    // padding: 0,
   },
   text: {
     fontSize: 18,
-    // // lineHeight: 21,
     fontWeight: 'bold',
-    // letterSpacing: 0.25,
     color: '#ddd',
     textAlign: 'center',
   },
 
   textSmall: {
     fontSize: 12,
-    // // lineHeight: 21,
     fontWeight: 'bold',
-    // letterSpacing: 0.25,
     color: '#ddd',
-
   },
 });

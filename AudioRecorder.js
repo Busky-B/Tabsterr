@@ -78,7 +78,7 @@ export default function AudioRecorder() {
         
           return (
              <View>
-                 <Button title="play recording" onPress={() => r.sound.replayAsync()}></Button>
+                 <Button color='#395244' title="play recording" onPress={() => r.sound.replayAsync()}></Button>
              </View> 
           )
       })
@@ -86,6 +86,7 @@ export default function AudioRecorder() {
   return (
     <View>
       <Button
+        color='#395244'
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
       />

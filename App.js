@@ -10,10 +10,11 @@ import {Icon} from 'react-native-elements'
 import SongModal from './SongModal.js';
 import AudioRecorder from './AudioRecorder.js';
 
-
 export default function App() {
   const bgImage = require('./img/bgi2.jpg'); // path to background image
 
+  // Option for hiding the audiorecorder, since it only records and playbacks audio but no other functionality
+  const [recorderVisible, setRecorderVisible] = useState(false);
   // Array where searchresults I.E songdata is saved
   const [eventData, setEventData] = useState([]) ;
 
@@ -61,7 +62,7 @@ export default function App() {
   const selectSong = (e) => {
     let selectedEvent = eventData.find(x => x.id === e);
     let artist = selectedEvent.artist;
-
+    
     setSongData({id: selectedEvent.id, title: selectedEvent.title, type: selectedEvent.type, artistName: artist.name});
     setModalVisible(!modalVisible); // Toggle the modal
     setImageLoading(!imageLoading); // toggle loading animation for image
@@ -93,7 +94,10 @@ export default function App() {
       <ImageBackground  source={bgImage} style={styles.bgImg} resizeMode='cover'>
         <View style={styles.greetingContainer}>
           <View >
-            <AudioRecorder />
+            {/* SET STATE TO TRUE TO SHOW AUDIOFEATURES */}
+            {recorderVisible && 
+               <AudioRecorder />
+            }
           </View>
           <View style={styles.greetingCardContainer} >
 

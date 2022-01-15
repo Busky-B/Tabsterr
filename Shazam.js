@@ -32,22 +32,48 @@ const convertAudio = () => {
 const debug = file => {
   console.log("HELLO FROM SHAZAM");
   console.log(typeof(file));
-  // var foo = RNFS.readFile(file, 'utf-8') ;
-  // console.log(foo)
-  // console.log(typeof(foo));
-  // r = new FileReader();
-  // let newFile = r.readAsBinaryString(file);
-  // console.log(newFile);
+  
+}
+
+/**
+ * This method is for using the audd api instead of shazam for music recognition, however it is behind a paywall
+ *  and i cant seem to get access to a trial again. I got it to work with sending curl commands for a little bit in the beginning of the project but as stated, paywall.
+ * Therefore i decided to create the method since it is pretty straight forward, eventhough the functionality will not be available in the app.
+ * All it would take is for me to send the audiofile from the AudioRecorder.js component to this method.
+ * 
+ *  Most of the code is slightly modified examples from the Audd-api docs
+ * @param {audiofile} audioFile 
+ */
+const auddApi = audioFile=> {
+  // in the case of sending audiofile as a string with url location of file
   var data = {
-    'url' : file,
+    'url' : audioFile,
     'return': 'apple_music',
     'api_token': '0a90d770c2875e2a5569234535ae1a05'
   };
-
   axios.post('https://api.audd.io/', data).then((res) => {
     console.log(res);
   }).catch((err) => console.log(err));
-  
+
+  // in the case of sending local file within the request
+  var data = {
+    'api_token': 'your api token',
+    'file': audioFile,
+    'return': 'apple_music,spotify',
+  };
+
+  axios({
+    method: 'post',
+    url: 'https://api.audd.io/',
+    data: data,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) =>  {
+    console.log(error);
+  });
 }
 
 if( typeof require !== 'undefined' && require.main === module) {
